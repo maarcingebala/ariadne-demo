@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "ariadne-demo"
+version = "0.1.0"
+description = ""
+authors = ["Marcin Gębala <maarcin.gebala@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+starlette = "^0.13.4"
+ariadne = "^0.11.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+pylint = "^2.5.3"
+mypy = "^0.782"
+black = "^19.10b0"
+uvicorn = "^0.11.5"
+ipython = "^7.16.1"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
