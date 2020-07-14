@@ -8,10 +8,12 @@ type_defs = """
         hello: String
         users: [User!]!
         user(id: ID!): User
+        posts: [Post!]!
     }
 
     type Mutation {
         createUser(input: UserData!): CreateUserResponse!
+        createPost(input: PostData!): CreatePostResponse!
     }
 
     type User {
@@ -29,11 +31,30 @@ type_defs = """
         error: String
         user: User
     }
+
+    type Post {
+        id: ID!
+        user: User!
+        content: String!
+        createdAt: String!
+    }
+
+    input PostData {
+        user: ID!
+        content: String!
+    }
+
+    type CreatePostResponse {
+        error: String
+        post: Post
+    }
 """
 
 
-mutation = MutationType()
 query = QueryType()
+mutation = MutationType()
+
+post = ObjectType("Post")
 user = ObjectType("User")
 
 
@@ -64,4 +85,25 @@ def resolve_create_user(*_, input):
     return {"error": error, "user": user}
 
 
-schema = make_executable_schema(type_defs, mutation, query, user)
+@query.field("posts")
+def resolve_posts(*_):
+    return db.get_all_posts()
+
+
+@post.field("user")
+def resolve_post_user(post, _info):
+    return db.get_user_by_id(post["user"])
+
+
+@mutation.field("createPost")
+def resolve_create_post(*_, input):
+    error = None
+    post = None
+    try:
+        post = db.create_post(input)
+    except Exception as e:
+        error = str(e)
+    return {"error": error, "post": post}
+
+
+schema = make_executable_schema(type_defs, mutation, query, user, post)

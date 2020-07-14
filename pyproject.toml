@@ -8,6 +8,7 @@ authors = ["Marcin Gębala <maarcin.gebala@gmail.com>"]
 python = "^3.8"
 starlette = "^0.13.4"
 ariadne = "^0.11.0"
+mypy = "^0.782"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
