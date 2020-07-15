@@ -16,4 +16,4 @@ $ pip install -r requirements.txt
 $ python run.py
 ```
 
-The app should be running on `0.0.0.0:8000`. Go to `0.0.0.0:8000/graphql/` to access the GraphQL Playground.
+The app should be running on `0.0.0.0:8000`.
