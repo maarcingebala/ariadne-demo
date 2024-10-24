@@ -1,3 +1,4 @@
+import asyncio
 import datetime
 
 
@@ -16,6 +17,8 @@ class DummyDatabase:
             "createdAt": "2020-07-14 17:24:34.473455",
         }
     ]
+
+    queue: asyncio.Queue = asyncio.Queue()
 
     def _get_next_id(self, db: list):
         return str(len(db) + 1)
@@ -61,6 +64,7 @@ class DummyDatabase:
         post["id"] = self._get_next_id(self.posts)
         post["createdAt"] = str(datetime.datetime.now())
         self.posts.append(post)
+        self.queue.put_nowait(post)
         return post
 
 

@@ -1,8 +1,14 @@
 from ariadne.asgi import GraphQL
-from starlette.applications import Starlette
+from ariadne.asgi.handlers import GraphQLTransportWSHandler
+from fastapi import FastAPI
 
 from .schema import schema
 
 
-app = Starlette(debug=True)
-app.mount("/", GraphQL(schema=schema, debug=True))
+app = FastAPI()
+
+@app.get("/")
+def index():
+    return {"message": "Hello World"}
+
+app.mount("/graphql/", GraphQL(schema, websocket_handler=GraphQLTransportWSHandler()))

@@ -2,12 +2,11 @@ Welcome to Ariadne Demo project! This is a simple app that shows basics of [Aria
 
 # Installation guide
 
-Prerequisites: Python 3.8
-
 1. Install dependencies:
 
 ```shell
-$ pip install -r requirements.txt
+$ pip install poetry
+$ poetry install --sync --no-root
 ```
 
 2. In the project root directory run:
@@ -17,3 +16,11 @@ $ python run.py
 ```
 
 The app should be running on `0.0.0.0:8000`. Go to `0.0.0.0:8000/graphql/` to access the GraphQL Playground.
+
+# Next
+
+Ideas for things to add next:
+
+- JWT authentication, auth directives
+- Add real database support
+- Frontend app
