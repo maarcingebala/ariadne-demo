@@ -6,7 +6,11 @@ class DummyDatabase:
     """Dummy in-memory database."""
 
     users = [
-        {"id": "1", "name": "John Doe", "email": "john@example.com",},
+        {
+            "id": "1",
+            "name": "John Doe",
+            "email": "john@example.com",
+        },
     ]
 
     posts = [
@@ -15,7 +19,19 @@ class DummyDatabase:
             "user": "1",
             "content": "Ariadne is the best!",
             "createdAt": "2020-07-14 17:24:34.473455",
-        }
+        },
+        {
+            "id": "2",
+            "user": "1",
+            "content": "Welcome to Pycon APAC 2024 in Yogyakarta.",
+            "createdAt": "2024-10-26 12:39:17.273475",
+        },
+        {
+            "id": "3",
+            "user": "1",
+            "content": "GraphQL servers provide IDE-like interface to build queries with auto-completion.",
+            "createdAt": "2024-10-26 12:40:10.766673",
+        },
     ]
 
     queue: asyncio.Queue = asyncio.Queue()
@@ -37,7 +53,7 @@ class DummyDatabase:
 
     def create_user(self, user_data: dict):
         """Creates a new user instance and saves it in the database.
-        
+
         Raises exception a user with given email already exists.
         """
         email = user_data["email"]
@@ -54,6 +70,9 @@ class DummyDatabase:
 
     def get_post_by_id(self, post_id: str):
         return next((post for post in self.posts if post["id"] == post_id), None)
+
+    def get_posts_by_user_id(self, user_id: str):
+        return [post for post in self.posts if post["user"] == user_id]
 
     def create_post(self, post_data: dict):
         user_id = post_data["user"]

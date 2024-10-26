@@ -31,14 +31,17 @@ type_defs = """
         "ID of an user."
         id: ID!
 
-        "Email of an user."
+        "Email of an user. Must be unique."
         email: String!
 
         "Name of an user"
         name: String
+
+        "Posts created by an user."
+        posts: [Post!]!
     }
 
-    "Input data for the creatUser mutation."
+    "Input data for the createUser mutation. Email must be unique."
     input UserData {
         email: String!
         name: String

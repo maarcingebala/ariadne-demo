@@ -14,6 +14,11 @@ def resolve_user(*_, **kwargs):
     return db.get_user_by_id(user_id)
 
 
+@user.field("posts")
+def resolve_posts(obj, info, **kwargs):
+    return db.get_posts_by_user_id(obj["id"])
+
+
 def resolve_create_user(*_, input):
     error = None
     user = None
